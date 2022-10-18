@@ -1,15 +1,10 @@
-/* import { createSlice } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
+import { contactReducer } from './contactSlice';
+import { filterReducer } from './filterSlice';
 
-const setContacts = [];
-
-export const store = createSlice({
-  name: 'contacts',
-  initialState: setContacts,
-  reducers: {
-    addNumber(state, action) {
-      state.push(action.payload);
-    },
-    deleteNumber(state, action) {},
+export const store = configureStore({
+  reducer: {
+    contacts: contactReducer,
+    filters: filterReducer,
   },
 });
- */
