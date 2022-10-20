@@ -5,26 +5,20 @@ const contactSlice = createSlice({
   name: 'contacts',
   initialState: [],
   reducers: {
-    addContact: {
-      reducer(state, action) {
-        state.push(action.payload);
-      },
-      prepare(name, number) {
-        return {
-          payload: {
-            name,
-            number,
+    addContact(state, { payload: { name, number } }) {
+      state.every(item => item.name.toLowerCase() !== name.toLowerCase())
+        ? state.push({
+            name: name,
+            number: number,
             id: nanoid(),
-          },
-        };
-      },
+          })
+        : alert(`${name} is alredy in contacts`);
     },
-    deleteContact(state, action) {
-      return state.filter(contact => contact.id !== action.payload);
+    deleteContact(state, { payload: id }) {
+      return state.filter(item => item.id !== id);
     },
   },
 });
 
-// Экспортируем генераторы экшенов и редюсер
 export const { addContact, deleteContact } = contactSlice.actions;
 export const contactReducer = contactSlice.reducer;
