@@ -4,17 +4,13 @@ import { Filter } from "./Filter/Filter";
 import { ContactList } from "./ContactList/ContactList";
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilter } from "redux/filterSlice";
-import { addContact,deleteContact} from "redux/contactSlice";
+import { deleteContact} from "redux/contactSlice";
 
 export const App = () => {
   const dispatch = useDispatch();
   const filters = useSelector(state => state.filters);
   const contacts = useSelector(state => state.contacts)
  
-  const onAddContact = (name,number) => {
-     dispatch(addContact(name,number))
-  }; 
-
 const deleteContactItem = (id) => dispatch(deleteContact(id));
 
 const changeContact = event => {
@@ -28,7 +24,7 @@ const changeContact = event => {
   return (
     <>
   <Section title="Phonebook">
-    <ContactForm onSubmit={ onAddContact} />
+    <ContactForm />
       {contacts.length === 0 ? (null) :
         <Filter value={filters} 
         changeContact={changeContact} 
